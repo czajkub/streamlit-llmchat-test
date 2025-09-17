@@ -1,12 +1,10 @@
 from functools import lru_cache
 
 from dotenv import find_dotenv
-from pydantic_settings import BaseSettings, SettingsConfigDict, CliUnknownArgs
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class Settings(BaseSettings, cli_ignore_unknown_args=True):
-    ignored_args: CliUnknownArgs
-
+class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=find_dotenv(usecwd=True),
         env_file_encoding="utf-8",
@@ -22,7 +20,7 @@ class Settings(BaseSettings, cli_ignore_unknown_args=True):
     paging_limit: int = 100
 
     # AGENT SETTINGS
-    api_key: str
+    api_key: str | None = None
     model: str = "gpt-4o"
     mcp_url: str = "http://127.0.0.1:8000/mcp"  # include "/mcp" endpoint
 
