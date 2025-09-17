@@ -15,7 +15,8 @@ agent_manager = AgentManager()
 if os.environ.get("API_KEY") is None:
     st.markdown("Please provide an API key to continue...")
 else:
-    asyncio.run(agent_manager.initialize())
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(agent_manager.initialize())
 
 st.title("ChatDziPiTi")
 
