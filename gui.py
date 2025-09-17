@@ -6,10 +6,13 @@ import streamlit as st
 
 from app.agent import AgentManager
 
-os.environ["api_key"] = st.secrets["API_KEY"]
+os.environ["API_KEY"] = st.secrets["API_KEY"]
 
 agent_manager = AgentManager()
-asyncio.run(agent_manager.initialize())
+if os.environ.get("API_KEY") is None:
+    st.markdown("Please provide an API key to continue...")
+else:
+    asyncio.run(agent_manager.initialize())
 
 st.title("ChatDziPiTi")
 
