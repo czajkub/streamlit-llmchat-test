@@ -1,12 +1,14 @@
 import asyncio
 import time
+import os
 
 import streamlit as st
 
 from app.agent import AgentManager
 
-agent_manager = AgentManager()
+os.environ["api_key"] = st.secrets["api_key"]
 
+agent_manager = AgentManager()
 
 st.title("ChatDziPiTi")
 
