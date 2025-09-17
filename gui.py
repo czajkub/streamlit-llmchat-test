@@ -1,3 +1,6 @@
+import asyncio
+import time
+
 import streamlit as st
 
 from app.agent import AgentManager
@@ -13,12 +16,30 @@ st.markdown(
     """,
 )
 
+if "messages" not in st.session_state:
+    st.session_state["messages"] = []
 
-async def runner():
-    await agent_manager.initialize()
+for message in st.session_state["messages"]:
+    with st.chat_message(message['role']):
+        st.markdown(message['text'])
 
-    while True:
-        user_input = st.text_input("Ask something!")
-        response = await agent_manager.handle_message(user_input, verbose=True)
-        st.write(response)
+if prompt := st.chat_input("What is up?"):
+    st.session_state.messages.append({"role": "user", "text": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
+    with st.chat_message("agent"):
+        placeholder = st.empty()
+        full_response = ""
+
+        if not agent_manager.is_initialized():
+            asyncio.run(agent_manager.initialize())
+        response = asyncio.run(agent_manager.handle_message(prompt))
+
+
+        for chunk in response.split():
+            full_response += chunk + " "
+            time.sleep(0.05)
+            placeholder.markdown(full_response + "▌")
+        placeholder.markdown(full_response)
+        st.session_state.messages.append({"role": "agent", "text": full_response})
