@@ -28,7 +28,7 @@ if prompt := st.chat_input("What is up?"):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    with st.chat_message("agent"):
+    with st.chat_message("assistant"):
         placeholder = st.empty()
         full_response = ""
 
@@ -42,4 +42,4 @@ if prompt := st.chat_input("What is up?"):
             time.sleep(0.05)
             placeholder.markdown(full_response + "▌")
         placeholder.markdown(full_response)
-        st.session_state.messages.append({"role": "agent", "text": full_response})
+        st.session_state.messages.append({"role": "assistant", "text": full_response})
