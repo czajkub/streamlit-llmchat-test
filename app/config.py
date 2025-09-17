@@ -1,10 +1,10 @@
 from functools import lru_cache
 
 from dotenv import find_dotenv
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, SettingsConfigDict, CliUnknownArgs
 
 
-class Settings(BaseSettings):
+class Settings(BaseSettings, cli_ignore_unknown_args=True):
     model_config = SettingsConfigDict(
         env_file=find_dotenv(usecwd=True),
         env_file_encoding="utf-8",
