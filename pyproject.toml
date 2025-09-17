@@ -14,7 +14,6 @@ dependencies = [
     "fastapi-cli>=0.0.8",
     "llama-index-llms-ollama>=0.7.3",
     "streamlit>=1.49.1",
-    "pre-commit>=4.3.0",
 ]
 
 [dependency-groups]

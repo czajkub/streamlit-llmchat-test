@@ -133,7 +133,6 @@ dependencies = [
     { name = "llama-index-llms-ollama" },
     { name = "llama-index-tools-mcp" },
     { name = "passlib" },
-    { name = "pre-commit" },
     { name = "pydantic-settings" },
     { name = "streamlit" },
 ]
@@ -160,7 +159,6 @@ requires-dist = [
     { name = "llama-index-llms-ollama", specifier = ">=0.7.3" },
     { name = "llama-index-tools-mcp", specifier = ">=0.4.0" },
     { name = "passlib", specifier = ">=1.7.4" },
-    { name = "pre-commit", specifier = ">=4.3.0" },
     { name = "pydantic-settings", specifier = ">=2.10.1" },
     { name = "streamlit", specifier = ">=1.49.1" },
 ]

@@ -2,8 +2,8 @@ from logging import INFO, basicConfig
 
 from fastapi import FastAPI
 
-from app.api import chat_router_v1
 from app.config import settings
+from app.api import chat_router_v1
 
 basicConfig(level=INFO, format="[%(asctime)s - %(name)s] (%(levelname)s) %(message)s")
 
