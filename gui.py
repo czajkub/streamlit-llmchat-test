@@ -1,14 +1,15 @@
 import asyncio
-import time
 import os
+import time
 
 import streamlit as st
 
 from app.agent import AgentManager
 
-os.environ["api_key"] = st.secrets["api_key"]
+os.environ["API_KEY"] = st.secrets["API_KEY"]
 
 agent_manager = AgentManager()
+asyncio.run(agent_manager.initialize())
 
 st.title("ChatDziPiTi")
 
@@ -34,8 +35,6 @@ if prompt := st.chat_input("What is up?"):
         placeholder = st.empty()
         full_response = ""
 
-        if not agent_manager.is_initialized():
-            asyncio.run(agent_manager.initialize())
         response = asyncio.run(agent_manager.handle_message(prompt))
 
         for chunk in response.split():
