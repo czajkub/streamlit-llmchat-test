@@ -6,7 +6,7 @@ import streamlit as st
 
 from app.agent import AgentManager
 
-os.environ["API_KEY"] = st.secrets["API_KEY"]
+os.environ["api_key"] = st.secrets["API_KEY"]
 
 agent_manager = AgentManager()
 asyncio.run(agent_manager.initialize())
