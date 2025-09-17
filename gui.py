@@ -7,7 +7,7 @@ import streamlit as st
 
 from app.agent import AgentManager
 
-# nest_asyncio.apply()
+nest_asyncio.apply()
 
 os.environ["API_KEY"] = st.secrets["API_KEY"]
 
