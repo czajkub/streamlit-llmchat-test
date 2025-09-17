@@ -1,7 +1,6 @@
 from functools import lru_cache
 
 from dotenv import find_dotenv
-from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -15,17 +14,15 @@ class Settings(BaseSettings):
     )
 
     # API SETTINGS
-    api_name: str = f"appleagent API"
+    api_name: str = "appleagent API"
     api_v1: str = "/api/v1"
     api_latest: str = api_v1
     paging_limit: int = 100
 
-
     # AGENT SETTINGS
     api_key: str
     model: str = "gpt-4o"
-    mcp_url: str = "http://127.0.0.1:8000/mcp" # include "/mcp" endpoint
-
+    mcp_url: str = "http://127.0.0.1:8000/mcp"  # include "/mcp" endpoint
 
     # 0. pytest ini_options
     # 1. environment variables
