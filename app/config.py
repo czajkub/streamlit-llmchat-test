@@ -5,6 +5,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict, CliUnknownArgs
 
 
 class Settings(BaseSettings, cli_ignore_unknown_args=True):
+    ignored_args: CliUnknownArgs
+
     model_config = SettingsConfigDict(
         env_file=find_dotenv(usecwd=True),
         env_file_encoding="utf-8",
