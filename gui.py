@@ -20,8 +20,8 @@ if "messages" not in st.session_state:
     st.session_state["messages"] = []
 
 for message in st.session_state["messages"]:
-    with st.chat_message(message['role']):
-        st.markdown(message['text'])
+    with st.chat_message(message["role"]):
+        st.markdown(message["text"])
 
 if prompt := st.chat_input("What is up?"):
     st.session_state.messages.append({"role": "user", "text": prompt})
@@ -35,7 +35,6 @@ if prompt := st.chat_input("What is up?"):
         if not agent_manager.is_initialized():
             asyncio.run(agent_manager.initialize())
         response = asyncio.run(agent_manager.handle_message(prompt))
-
 
         for chunk in response.split():
             full_response += chunk + " "
