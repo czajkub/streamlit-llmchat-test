@@ -2,9 +2,12 @@ import asyncio
 import os
 import time
 
+import nest_asyncio
 import streamlit as st
 
 from app.agent import AgentManager
+
+nest_asyncio.apply()
 
 os.environ["API_KEY"] = st.secrets["API_KEY"]
 
@@ -12,8 +15,7 @@ agent_manager = AgentManager()
 if os.environ.get("API_KEY") is None:
     st.markdown("Please provide an API key to continue...")
 else:
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(agent_manager.initialize())
+    asyncio.run(agent_manager.initialize())
 
 st.title("ChatDziPiTi")
 

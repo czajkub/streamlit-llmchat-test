@@ -14,6 +14,7 @@ dependencies = [
     "fastapi-cli>=0.0.8",
     "llama-index-llms-ollama>=0.7.3",
     "streamlit>=1.49.1",
+    "nest-asyncio>=1.6.0",
 ]
 
 [dependency-groups]
