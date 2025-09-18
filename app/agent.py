@@ -28,7 +28,7 @@ class AgentManager:
             return
 
         # self.llm = Ollama(model=model, request_timeout=10.0)
-        self.llm = OpenAI(model, api_key=settings.api_key, system_prompt=system_prompt)
+        self.llm = OpenAI(model, api_key=settings.API_KEY, system_prompt=system_prompt)
         self.tools = await self._get_tools()
 
         if system_prompt is None:
