@@ -1,15 +1,16 @@
-import asyncio
 import os
+import streamlit as st
+os.environ["API_KEY"] = st.secrets["API_KEY"]
+
+import asyncio
 import time
 
 import nest_asyncio
-import streamlit as st
 
 from app.agent import AgentManager
 
-nest_asyncio.apply()
+# nest_asyncio.apply()
 
-os.environ["API_KEY"] = st.secrets["API_KEY"]
 
 agent_manager = AgentManager()
 if os.environ.get("API_KEY") is None:
@@ -27,9 +28,6 @@ st.markdown(
 )
 
 st.divider()
-
-st.markdown(os.environ.get("API_KEY"))
-st.markdown(agent_manager.is_initialized())
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = []

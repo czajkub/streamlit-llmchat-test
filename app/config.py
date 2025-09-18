@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     paging_limit: int = 100
 
     # AGENT SETTINGS
-    API_KEY: str | None = None
+    API_KEY: str
     model: str = "gpt-4o"
     mcp_url: str = "http://127.0.0.1:8000/mcp"  # include "/mcp" endpoint
 
