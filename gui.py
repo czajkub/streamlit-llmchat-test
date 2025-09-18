@@ -9,12 +9,17 @@ import nest_asyncio
 
 from app.agent import AgentManager
 
-# nest_asyncio.apply()
+nest_asyncio.apply()
 
 
 agent_manager = AgentManager()
 if os.environ.get("API_KEY") is None:
     st.markdown("Please provide an API key to continue...")
+else:
+    try:
+        asyncio.run(agent_manager.initialize())
+    except ConnectionError:
+        st.markdown("Connection refused...")
 
 st.image("cat.jpg", width=100)
 st.title("ChatDżiPiTi")
@@ -46,9 +51,6 @@ if prompt := st.chat_input("What is up?"):
         full_response = ""
 
         try:
-            if not agent_manager.is_initialized():
-                asyncio.run(agent_manager.initialize())
-
             with st.spinner("running...", show_time=True):
                 response = asyncio.run(agent_manager.handle_message(prompt))
         except ConnectionError:
