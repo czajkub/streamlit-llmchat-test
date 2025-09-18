@@ -28,6 +28,9 @@ st.markdown(
 
 st.divider()
 
+st.markdown(os.environ.get("API_KEY"))
+st.markdown(agent_manager.is_initialized())
+
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
 
