@@ -34,6 +34,7 @@ try:
     asyncio.run(agent_manager.initialize())
 except ExceptionGroup:
     st.markdown("Failed to initialize the agent...")
+    raise
 
 
 if "chats" not in st.session_state:
