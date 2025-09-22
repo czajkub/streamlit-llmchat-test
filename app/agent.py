@@ -29,7 +29,7 @@ class AgentManager:
             self.mcp_client = MCPServerStreamableHTTP(settings.mcp_url)
         except Exception as e:
             self.mcp_client = None
-            raise ConnectionError("Could not connect to MCP server") from e
+            # raise ConnectionError("Could not connect to MCP server") from e
 
         if system_prompt is None:
             system_prompt = "You are an AI assistant to help the user as best as you can. You can use the tools provided to you to help the user."
