@@ -7,6 +7,8 @@ from pydantic_ai import Agent
 from pydantic_ai.tools import Tool
 from pydantic_ai.mcp import MCPServerStreamableHTTP
 
+import logfire
+
 from app.config import settings
 
 
@@ -21,6 +23,8 @@ class AgentManager:
                          system_prompt: str | None = None):
         if self._initialized:
             return
+        logfire.configure()
+        logfire.instrument_pydantic_ai()
         try:
             self.mcp_client = MCPServerStreamableHTTP(settings.mcp_url)
         except Exception as e:

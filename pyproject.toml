@@ -16,6 +16,7 @@ dependencies = [
     "streamlit>=1.49.1",
     "nest-asyncio>=1.6.0",
     "pydantic-ai>=1.0.10",
+    "logfire>=4.8.0",
 ]
 
 [dependency-groups]
