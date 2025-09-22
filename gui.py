@@ -19,12 +19,9 @@ except (ValidationError, AttributeError):
         st.warning("Provide a valid API key.")
         raise
 
-
-
 if "MCP_URL" in st.secrets:
     os.environ["MCP_URL"] = st.secrets["MCP_URL"]
 
-st.markdown(os.environ["API_KEY"])
 from app.agent import AgentManager
 
 
@@ -43,6 +40,10 @@ if "active_chat" not in st.session_state:
     st.session_state.active_chat = 1
 
 
+def geticon(i: int) -> str:
+    return '📌' if i == st.session_state.active_chat else '💤'
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 
 st.title("Your AI Assistant")
@@ -58,10 +59,11 @@ with st.sidebar:
         st.session_state.chats += 1
         st.session_state.active_chat = st.session_state.chats
     st.divider()
-    st.session_state.chat_buttons = []
     for i in range(1, st.session_state["chats"] + 1):
-        if st.button(f"Chat {i}", key=f"chat{i}"):
+        if st.button(f"Chat {i}",
+                     key=f"chat{i}", icon=geticon(i)):
             st.session_state.active_chat = i
+            st.rerun()
 
 # -----------------------------
 
@@ -89,9 +91,11 @@ if prompt := st.chat_input("Ask me something"):
         except AuthenticationError:
             st.warning("Please provide an api key in .env")
             response = ""
+            raise
         except (ExceptionGroup, RuntimeError):
             st.warning("Failed to connect with agent or MCP server.")
             response = ""
+            raise
 
         # Split response into chunks to imitate AI behaviour
         for chunk in response.split():
