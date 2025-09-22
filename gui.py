@@ -5,13 +5,14 @@ import os
 import streamlit as st
 from streamlit.errors import StreamlitSecretNotFoundError
 from openai import AuthenticationError
+from pydantic_core._pydantic_core import ValidationError
 
-from app.config import settings
-os.environ["API_KEY"] = settings.api_key
-
-# Try to authenticate with streamlit secrets
-# if .env doesn't provide an api key
-if settings.api_key == "":
+try:
+    from app.config import settings
+    os.environ["API_KEY"] = settings.api_key
+except ValidationError:
+    # Try to authenticate with streamlit secrets
+    # if .env doesn't provide an api key
     try:
         os.environ["API_KEY"] = st.secrets["API_KEY"]
     except StreamlitSecretNotFoundError:
