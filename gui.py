@@ -10,7 +10,7 @@ from pydantic_core._pydantic_core import ValidationError
 try:
     from app.config import settings
     os.environ["API_KEY"] = settings.api_key
-except ValidationError:
+except (ValidationError, AttributeError):
     # Try to authenticate with streamlit secrets
     # if .env doesn't provide an api key
     try:
