@@ -19,9 +19,12 @@ except (ValidationError, AttributeError):
         st.warning("Provide a valid API key.")
         raise
 
+
+
 if "MCP_URL" in st.secrets:
     os.environ["MCP_URL"] = st.secrets["MCP_URL"]
 
+st.markdown(os.environ["API_KEY"])
 from app.agent import AgentManager
 
 
@@ -86,7 +89,7 @@ if prompt := st.chat_input("Ask me something"):
             st.warning("Please provide an api key in .env")
             response = ""
         except (ExceptionGroup, RuntimeError):
-            st.warning("Failed to connect with MCP server.")
+            st.warning("Failed to connect with agent or MCP server.")
             response = ""
 
         # Split response into chunks to imitate AI behaviour
