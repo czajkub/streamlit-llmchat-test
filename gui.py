@@ -32,6 +32,11 @@ agent_manager = AgentManager()
 
 try:
     asyncio.run(agent_manager.initialize())
+    st.markdown("success initialising")
+    st.markdown(agent_manager.tools)
+    st.markdown(agent_manager.agent)
+    st.markdown(agent_manager.mcp_client)
+    st.markdown(agent_manager.mcp_client.url)
 except ExceptionGroup:
     st.markdown("Failed to initialize the agent...")
     raise
