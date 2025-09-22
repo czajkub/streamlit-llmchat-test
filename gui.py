@@ -35,6 +35,7 @@ try:
     st.markdown("success initialising")
     st.markdown(agent_manager.tools)
     st.markdown(agent_manager.agent)
+    st.markdown(agent_manager.agent.toolsets)
     st.markdown(agent_manager.mcp_client)
     st.markdown(agent_manager.mcp_client.url)
 except ExceptionGroup:
