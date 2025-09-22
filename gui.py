@@ -7,6 +7,9 @@ from streamlit.errors import StreamlitSecretNotFoundError
 from openai import AuthenticationError
 from pydantic_core._pydantic_core import ValidationError
 
+import nest_asyncio
+nest_asyncio.apply()
+
 try:
     from app.config import settings
     os.environ["API_KEY"] = settings.api_key
